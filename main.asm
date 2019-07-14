@@ -23,10 +23,6 @@ NMICustomFar:
 	PHY
 	SEP #$30
 	JSR ReadControllers
-	LDA RAM_mouse_pos_x
-	STA $1EB
-	LDA RAM_mouse_pos_y
-	STA $1ED
 	REP #$30
 	PLY
 	PLX
