@@ -4,7 +4,7 @@ NMIOriginal:
 org $00FC00
 NMICustom:
 	PEA.w NMICustomFar>>8
-	PEA.w ((NMICustomFar<<8)&$FF00)+$20
+	PEA.w ((NMICustomFar<<8)&$FF00)+$00
 	;NOP #4
 	JMP NMIOriginal
 
@@ -18,11 +18,17 @@ incsrc "mouse.asm"
 
 print pc
 NMICustomFar:
+	PHA
 	PHX
 	PHY
 	SEP #$30
 	JSR ReadControllers
+	LDA RAM_mouse_pos_x
+	STA $1EB
+	LDA RAM_mouse_pos_y
+	STA $1ED
 	REP #$30
 	PLY
 	PLX
+	PLA
 	RTI
